@@ -1,403 +1,535 @@
-# 🚀 Area2 AI Assistant — 產品開發計劃書
+# 🚀 Area2 AI Assistant — 產品開發計劃書 (v2)
 ## 基於 OpenClaw 平台的香港中小企 AI 訂閱服務
+## 核心賣點：WhatsApp 原生 × 越用越識你
 
-**版本：** v1.0  
+**版本：** v2.0  
 **日期：** 2026 年 3 月  
 **撰寫：** A2 (B03) × ErIc  
-**狀態：** 草稿
 
 ---
 
 ## 目錄
-1. [產品定義與願景](#1-產品定義與願景)
-2. [用戶痛點對照功能表](#2-用戶痛點對照功能表)
-3. [產品能力清單](#3-產品能力清單)
-4. [訂閱方案設計](#4-訂閱方案設計)
-5. [網站架構規劃](#5-網站架構規劃)
-6. [技術架構](#6-技術架構)
-7. [Nuxt.js 開發規格](#7-nuxtjs-開發規格)
-8. [頁面設計細則](#8-頁面設計細則)
-9. [多語言策略](#9-多語言策略)
-10. [SEO 策略](#10-seo-策略)
-11. [開發路線圖](#11-開發路線圖)
-12. [商業模型](#12-商業模型)
+1. [產品定義與核心賣點](#1-產品定義與核心賣點)
+2. [兩大獨家賣點深度解析](#2-兩大獨家賣點深度解析)
+3. [完整能力清單（基於實際 Skills）](#3-完整能力清單)
+4. [用戶痛點 × 真實能力對照](#4-用戶痛點對照)
+5. [訂閱方案設計](#5-訂閱方案設計)
+6. [用戶故事——一天用下來的體驗](#6-用戶故事)
+7. [網站架構規劃](#7-網站架構規劃)
+8. [技術架構](#8-技術架構)
+9. [Nuxt.js 開發規格](#9-nuxtjs-開發規格)
+10. [頁面設計細則](#10-頁面設計細則)
+11. [多語言策略](#11-多語言策略)
+12. [SEO 策略](#12-seo-策略)
+13. [開發路線圖](#13-開發路線圖)
+14. [商業模型](#14-商業模型)
 
 ---
 
-## 1. 產品定義與願景
+## 1. 產品定義與核心賣點
 
 ### 1.1 一句話定位
-> **「香港第一個會主動幫你做嘢的 AI 幫手——唔只係問答，而係真正執行任務。」**
 
-### 1.2 產品名稱建議
+> **「你 WhatsApp 它，它幫你做嘢——而且越用越識你。」**
+
+### 1.2 產品名稱
 - **Area2 AI**（主品牌）
-- 副標題：智能業務自動化平台
-- 英文：*Area2 AI — Your Always-On Business Agent*
+- 英文 Tagline：*Your AI that lives in WhatsApp and learns your business*
+- 廣東話 Tagline：「住喺你 WhatsApp 入面的 AI 幫手，越用越識你」
 
-### 1.3 核心差異化
+### 1.3 兩大核心賣點（USP）
+
+```
+╔════════════════════════════════════════════════════════╗
+║  USP 1: WhatsApp 原生                                  ║
+║  「唔使裝 App、唔使改習慣——直接喺 WhatsApp 用 AI」     ║
+╠════════════════════════════════════════════════════════╣
+║  USP 2: 越用越識你                                     ║
+║  「記住你的業務、客戶、習慣——AI 會不斷學習你的心意」   ║
+╚════════════════════════════════════════════════════════╝
+```
+
+### 1.4 核心差異化表
+
 | 普通 AI 工具 | Area2 AI |
 |------------|---------|
-| 你問，它答 | **它主動幫你做嘢** |
-| 每次 Session 忘記你 | **永久記住你的業務背景** |
-| 只能在網頁用 | **WhatsApp / Telegram / Discord 都得** |
-| 只有一個 AI | **多個 AI 腦並行（分工合作）** |
-| 需要自己設定 | **我哋幫你度身設定** |
-| 英文介面 | **廣東話 AI + 繁體中文** |
-
-### 1.4 產品願景
-成為香港中小企最得力的「數字員工」——24 小時在線、永不請病假、永遠記得你公司的事、自動處理重複工作，讓老闆和員工專注更有價值的事。
+| 要開另一個 App | **直接喺 WhatsApp 用** |
+| 每次 Session 忘記你 | **永久記住你的業務（越用越識）** |
+| 你問，它答（被動） | **它主動幫你做嘢（主動）** |
+| 只有一個 AI | **多個專門 AI 腦協作** |
+| 英文介面為主 | **廣東話語音、廣東話回覆** |
+| 照單全收 | **學習你的偏好，自動適應** |
 
 ---
 
-## 2. 用戶痛點對照功能表
+## 2. 兩大獨家賣點深度解析
 
-| 用戶痛點 | 現有解決 | Area2 AI 方案 | 使用的能力 |
-|---------|---------|--------------|-----------|
-| 每日大量 WhatsApp 回覆佔用時間 | 自己回 / 請人 | AI 自動篩選、分類、建議回覆甚至自動回 | WhatsApp 整合 + 自動化 |
-| 下班後客戶訊息無人跟進 | 無 | 24/7 在線，自動接收並回應或記錄 | Heartbeat 機制 + 多渠道 |
-| 每次 AI 都要重新介紹公司背景 | 重複輸入 prompt | 永久記憶（公司簡介、產品、SOP） | Milvus 向量記憶庫 |
-| 不同工具資訊分散（Email、Sheet、WhatsApp） | 人手整合 | 跨工具資料搜集、整合、總結 | Skills 系統 + API 整合 |
-| 想用 AI 但不懂 prompt | 買咗唔識用 | 度身定製 prompt，用戶只需自然語言指令 | 客製化設定服務 |
-| 需要整理、撰寫報告 | 人手打字 | AI 自動生成報告、摘要、提案 | LLM + 文件處理 |
-| 招聘廣告、內容創作耗時 | 自己寫/外包 | AI 生成符合品牌語氣的文案 | 多模型 + 品牌記憶 |
-| 需要追蹤競爭對手/市場情報 | 人手搜索 | 定期自動搜集、整理、通知 | Web Search + Cron 任務 |
-| 多語言客戶（中英文混用） | 人手翻譯 | 即時翻譯、自動切換語言回覆 | 多語言 LLM |
-| 員工培訓 SOP 文件無效 | 印出來冇人睇 | AI 成為「活的 SOP」，隨時問隨時答 | RAG + 文件上傳 |
-| 安排會議、跟進事項靠人腦 | Google Calendar | AI 自動提醒、安排、跟進 | Calendar 整合 + Cron |
-| 發票/報價單需人手處理 | Excel 打字 | OCR + AI 提取資料、自動填表 | PDF 處理 + 文件 Skills |
-| 社交媒體需要每日更新 | 人手創作 | AI 生成貼文、安排發佈 | 社交媒體 Skills |
-| 開會後行動項目無人跟進 | Email 發出去冇人理 | 語音轉文字 + 自動生成行動清單 + 分配 | STT + Task 管理 |
+### 2.1 USP 1：WhatsApp 原生（最低門檻的 AI 採用）
 
----
+#### 為什麼 WhatsApp 是香港最佳切入點
+- 香港 WhatsApp 滲透率約 90%
+- 73% 香港中小企已用 WhatsApp 做客服
+- 老闆每日平均花 3–4 小時在 WhatsApp
 
-## 3. 產品能力清單
+#### Area2 AI 的 WhatsApp 體驗
 
-### 3.1 核心能力（所有方案包含）
+**個人 DM 模式（Personal Assistant）：**
+```
+ErIc → Area2 AI（WhatsApp）：
+「幫我搵下今日港股有咩大升幅，整個摘要」
 
-#### 🧠 智能記憶系統
-- **業務背景記憶：** 公司名稱、產品、客戶、SOP、行業術語
-- **跨 Session 記憶：** 上次討論的項目自動記起
-- **人員記憶：** 記住重要客戶、員工、合作夥伴的偏好和歷史
-- **技術：** Milvus 向量資料庫 + Hybrid Search（向量 70% + BM25 關鍵詞 30%）
+Area2 AI 自動：
+1. 搜尋即時股市數據
+2. 整理今日大升幅股票
+3. WhatsApp 回覆清晰摘要（附數字）
 
-#### 📱 多渠道接入
-- **WhatsApp Business：** 接收/發送訊息、自動回覆、群組管理
-- **Telegram：** Bot 形式，支援命令、群組、媒體
-- **Discord：** 企業群組協作
-- **Web Chat：** 嵌入式聊天窗口
-- **Email（計劃中）：** Gmail / Outlook 整合
+全程：用戶喺 WhatsApp，AI 喺 WhatsApp，唔需要跳去任何 App
+```
 
-#### ⚙️ 任務執行引擎
-- **Cron 定時任務：** 定期執行、報告、提醒
-- **Sub-Agent 系統：** 複雜任務自動拆解、並行處理
-- **Web 搜索：** 即時獲取最新資訊
-- **文件處理：** PDF、Word、Excel 讀取分析
-- **截圖/視覺分析：** 分析圖片、截圖、設計稿
+**WhatsApp Group 模式（Team Assistant）：**
+```
+Group「銷售團隊」：
+陳生：「今日同 ABC 公司開完會，要 follow up 三件事...」
+（一段語音訊息）
 
-#### 🎯 廣東話優先
-- AI 回覆預設廣東話書面語
-- 理解廣東話俚語和商業用語
-- 支援繁體中文 + 英文切換
+Area2 AI 自動：
+1. 轉錄廣東話語音
+2. 識別行動事項
+3. 在 Group 回覆「✅ 已記錄以下 Follow Up：
+   1. [事項A] → 陳生負責 → 本週五前
+   2. [事項B] → ...」
+4. 設定提醒，時間到自動再提醒 Group
+```
 
-### 3.2 進階能力（商業版及以上）
-
-#### 🤖 多 AI 模型調度
-| 任務類型 | 推薦模型 | 原因 |
-|---------|---------|------|
-| 日常問答、快速回覆 | MiniMax M2.5 | 速度快、成本低 |
-| 複雜分析、長文件 | Claude Sonnet/Opus | 理解能力強 |
-| 代碼、數據分析 | GPT-4o | 邏輯能力強 |
-| 圖像生成 | Wanx / DALL-E | 創意內容 |
-| 語音轉文字 | Qwen-Omni | 廣東話準確 |
-
-#### 📊 業務整合
-- **Google Workspace：** Gmail、Calendar、Docs、Sheets
-- **Microsoft 365：** Outlook、Teams、OneDrive
-- **CRM：** HubSpot、Salesforce（透過 API）
-- **會計系統：** Xero、QuickBooks（透過 API）
-- **電商：** Shopify、WooCommerce 訂單監控
-- **Lark/飛書：** 任務管理、文件協作
-
-#### 🛠️ Skills 技能包系統
-技能包是可安裝的功能模組，擴展 AI 能力：
-
-| 技能包名稱 | 功能 | 適合行業 |
-|-----------|------|---------|
-| **社交媒體管家** | 自動爬取競品內容、生成貼文建議 | 全行業 |
-| **客服機械人** | 自動回覆 FAQ、升級複雜查詢 | 零售、服務業 |
-| **合約分析師** | 閱讀合約、標記風險條款 | 貿易、法律 |
-| **市場情報員** | 每日自動搜集行業新聞、競品動態 | 全行業 |
-| **會議記錄員** | 語音轉文字 + 行動清單 | 全行業 |
-| **招聘助手** | 篩選履歷、生成面試問題 | 全行業 |
-| **SEO 顧問** | 分析網站、建議優化策略 | 數碼營銷 |
-| **QA 測試員** | 自動測試網頁、生成報告 | 科技公司 |
-
-### 3.3 企業版能力
-
-#### 🏢 多 Agent 架構
-- 可設定多個專門 AI（如：客服 AI、行銷 AI、財務 AI）
-- 每個 AI 有獨立記憶和工作空間
-- AI 之間可以協作、互相傳遞任務
-
-#### 🔒 私隱和安全
-- 自架部署選項（數據不離開公司）
-- 符合香港《個人資料（私隱）條例》
-- 角色權限管理（員工只能存取授權 AI）
-- 完整操作日誌
+#### 支援的 WhatsApp 功能
+- ✅ DM（個人對話）
+- ✅ Group Chat（群組）
+- ✅ 語音訊息（廣東話自動轉文字）
+- ✅ 圖片/截圖分析
+- ✅ PDF/文件接收分析
+- ✅ 主動發送提醒
+- ✅ 定時報告
 
 ---
 
-## 4. 訂閱方案設計
+### 2.2 USP 2：越用越識你（學習型 AI 記憶）
 
-### 4.1 方案詳情
+#### 記憶如何運作
+
+```
+你每次同 Area2 AI 互動，它都在學習：
+
+📝 學習你的業務
+   → 你係做咩行業、賣咩產品、主要客群係邊個
+
+👥 學習你的客戶
+   → 張生係你嘅大客、李小姐偏好週五下午開會、
+     ABC公司每月訂 50 件
+
+📋 學習你的工作習慣
+   → 你通常幾點睇報告、你鍾意用廣東話定英文回客、
+     你嘅報價單格式
+
+🎯 學習你的偏好
+   → 你鍾意直接答案、唔鍾意廢話、
+     你對某類客戶有特別處理方式
+
+第 1 天用：一個聰明的 AI
+第 30 天用：一個識你的 AI  
+第 90 天用：一個幾乎係你「數字孖生」的 AI
+```
+
+#### 記憶的商業價值（留客機制）
+
+```
+用了 Area2 AI 3 個月後的用戶：
+
+AI 記住了：
+✓ 100+ 個客戶的偏好和歷史
+✓ 你的業務流程和 SOP
+✓ 你的回覆風格和常用說法
+✓ 你的重要 deadline 和習慣
+
+如果轉用 ChatGPT？
+→ 要從頭解釋所有嘢
+→ 新 AI 完全唔識你
+→ 用戶根本唔捨得轉
+
+這就是最強的留客護城河（Retention Moat）
+```
+
+#### 記憶技術（向量記憶庫）
+- **儲存格式：** LanceDB 向量資料庫
+- **搜索方式：** 混合搜索（語義 70% + 關鍵詞 30%）
+- **記憶分類：** 業務事實、決定記錄、用戶偏好、實體信息
+- **記憶容量：** Starter 500條 / Business 5,000條 / Enterprise 無限
+- **學習方式：** 每次對話自動提取重要信息存入記憶
 
 ---
+
+## 3. 完整能力清單
+
+### 3.1 基礎能力（所有方案）
+
+#### 💬 WhatsApp 原生
+- DM 個人助手模式
+- Group 群組協作模式
+- 語音訊息廣東話轉文字
+- 圖片/截圖分析
+- PDF/Word/Excel 接收分析
+- 主動提醒（定時推送到 WhatsApp）
+
+#### 🧠 記憶系統
+- 向量記憶庫（LanceDB）
+- 業務背景永久記憶
+- 客戶歷史記憶
+- 自動學習用戶偏好
+- 跨 Session 記憶延續
+
+#### ⏰ 主動任務
+- Cron 定時任務（每日/每週/指定時間）
+- 主動提醒和跟進
+- 定時報告推送（WhatsApp 發送）
+- 業務監察（競品、社媒、市場）
+
+---
+
+### 3.2 技能包（Skills）——基於真實已有功能
+
+#### 📊 市場情報技能包
+| 技能 | 功能 | 業務場景 |
+|------|------|---------|
+| 社交媒體監察 | 小紅書/抖音/Instagram/微博 爬蟲 | 監察競品、KOL 動態 |
+| 股票市場 | 即時股票數據（yFinance API）| 每日港股摘要 |
+| 網絡研究 | Perplexity AI 搜索 + 引用 | 任何市場調查 |
+| YouTube 摘要 | 提取影片要點 | 培訓材料、競品研究 |
+
+#### 📄 文件處理技能包
+| 技能 | 功能 | 業務場景 |
+|------|------|---------|
+| PDF 文字提取 + OCR | 繁中英 OCR | 合約、發票、報告 |
+| Word 翻譯 | DOCX 格式保留翻譯 | 客戶文件中英翻譯 |
+| 批量圖片處理 | 批量 OCR / 分析 | 大量收據、單據 |
+| PDF 轉 Word | 格式轉換 | 文件整理 |
+
+#### 🎙️ 語音和媒體技能包
+| 技能 | 功能 | 業務場景 |
+|------|------|---------|
+| 廣東話 TTS | 文字轉廣東話語音 | 語音通知、客服語音 |
+| 長文 TTS | 長篇文章轉音頻 | 培訓材料有聲版 |
+| 語音分析 | 會議錄音 → 行動事項 | 開會後自動整理 |
+| 影片生成 | AI 生成影片（MiniMax） | 廣告、社媒內容 |
+| 音樂生成 | AI 作曲填詞 | 廣告音樂、背景音 |
+| 產品示範片 | 錄屏 → 專業廣東話配音 | 產品介紹影片 |
+
+#### 🖼️ 圖像技能包
+| 技能 | 功能 | 業務場景 |
+|------|------|---------|
+| 圖片生成 | 阿里雲 Wanx AI 出圖 | 社媒配圖、產品圖 |
+| MiniMax 圖片 | MiniMax 圖片生成 | 另一風格選擇 |
+| 視覺分析 | DashScope 圖片理解 | 產品圖分析、比較 |
+
+#### 🛒 電商情報技能包
+| 技能 | 功能 | 業務場景 |
+|------|------|---------|
+| HKTVMall 監察 | 搜索、監察產品/價格 | 競品定價、選品 |
+| Taobao 搜索 | 搜索商品 | 採購參考、比價 |
+
+#### 🔧 業務工具技能包
+| 技能 | 功能 | 業務場景 |
+|------|------|---------|
+| Lark/飛書任務 | 任務 CRUD、清單管理 | 項目管理 |
+| 智能提醒 | WhatsApp Group/DM 精準提醒 | 會議提醒、跟進 |
+| WhatsApp 助手 | 標準化 WhatsApp 工作流 | 全面 WhatsApp 管理 |
+| QA 測試 | 網頁自動測試 | IT 公司適用 |
+| CMS 文件生成 | 自動生成 CMS 操作手冊 | 系統培訓 |
+| Planka 看板 | 項目看板管理 | 項目追蹤 |
+
+#### 🤖 AI 協作技能包
+| 技能 | 功能 | 業務場景 |
+|------|------|---------|
+| Sub-Agent 系統 | 複雜任務拆解並行 | 大型研究、報告生成 |
+| 多模型調度 | 根據任務選最佳模型 | 成本 + 效果優化 |
+| Bug 分析 | 用戶反饋 → 技術報告 | IT/軟件公司 |
+
+---
+
+### 3.3 渠道能力（多於 WhatsApp）
+
+| 渠道 | 支援 | 用途 |
+|------|------|------|
+| **WhatsApp** | ✅ DM + Group | **主要渠道——香港首選** |
+| **Telegram** | ✅ Bot + Group | 科技圈、初創常用 |
+| **Discord** | ✅ Server + Channel | IT/遊戲/社群公司 |
+| Web Chat | ✅ 嵌入式 | 官網客服 |
+| Signal（預計） | 🔜 計劃中 | 高私隱需求 |
+
+---
+
+## 4. 用戶痛點對照
+
+### 4.1 完整痛點 × 解決方案矩陣
+
+| 用戶痛點 | 傳統解決 | Area2 AI 方案 | 使用技能 |
+|---------|---------|--------------|--------|
+| WhatsApp 回唔切 | 自己回/請人 | WhatsApp AI 自動篩選、建議/自動回覆 | whatsapp-assistant |
+| 語音訊息聽唔完 | 自己播晒 | 廣東話自動轉文字 + 摘要 | audio-handler |
+| 開會後冇人跟進 | Email 發出去無人理 | 會議語音 → 行動清單 → 分配 → 自動提醒 | audio-handler + cron |
+| AI 唔記得你 | 每次重新解釋 | 向量記憶庫，永久記住業務背景 | memory system |
+| 下班後漏接客 | 無 | 24/7 WhatsApp 自動回覆 | whatsapp + cron |
+| 競品動態追唔到 | 人手搜索 | 定時自動爬社交媒體 + WhatsApp 摘要 | social-scraper + cron |
+| 股市/市場資訊 | 自己查 App | 每日自動股市摘要推送 WhatsApp | stock-market + cron |
+| PDF/合約要分析 | 自己讀/外包 | WhatsApp 發 PDF → AI 即時解讀 | pdf-utils |
+| 文件要中英翻譯 | 人手翻譯/翻譯社 | Word 文件格式保留翻譯 | docx-translator-v2 |
+| 社媒帖文耗時 | 自己寫/外包 | AI 生成符合品牌語氣帖文 + 配圖 | image-generation |
+| 廣告影片太貴 | 外包製作公司 | AI 生成影片 / 錄屏 → 配音 | minimax-video, screen-to-script |
+| 客服語音太貴 | 請人 / IVR | 廣東話 AI 語音回覆 | minimax-tts |
+| HKTVMall 競品監察 | 人手定期搜索 | 自動監察價格 + 通知 | hktvmall |
+| 採購比價 | 人手上 Taobao | 自動搜索比價 | taobao-search |
+| YouTube 培訓影片太長 | 自己全看 | AI 提取重點 + 中文摘要 | youtube-summarizer |
+| 項目任務無人跟進 | Email/口頭 | Lark 任務自動創建 + 提醒 | lark-tasks |
+
+---
+
+## 5. 訂閱方案設計
 
 ### 🌱 Starter（入門版）
-**HK$298/月**（年付 HK$248/月）
+**HK$298/月**（年付 HK$248/月，慳 17%）
 
-**適合：** 自由職業者、1–3人初創
+**適合：** 自由職業者、1–3人初創、個人老闆
+
+**核心亮點：** WhatsApp AI + 基礎記憶——比 ChatGPT 多 WhatsApp，同價
 
 | 功能 | 包含 |
 |------|------|
-| AI 渠道 | Telegram 或 WhatsApp（選一） |
-| 記憶容量 | 500 條記憶 |
+| **WhatsApp DM** | ✅ 個人助手 |
+| **WhatsApp Group** | ❌ |
+| 記憶容量 | 500 條 |
 | 每月對話次數 | 500 次 |
-| AI 模型 | 1 個模型（MiniMax） |
-| Skills 技能包 | 基礎 3 個 |
-| Sub-Agents | 無 |
-| 定時任務（Cron） | 3 個 |
-| 技術支援 | Email，3 個工作日回覆 |
-| 設定服務 | 自助設定（文件指引） |
+| AI 模型 | 1 個（MiniMax 快速模型）|
+| **語音訊息轉文字** | ✅ 100 次/月 |
+| **定時任務（Cron）** | 3 個 |
+| 技能包 | 基礎 3 個（提醒、搜索、文件）|
+| 主動 WhatsApp 推送 | ✅ |
+| 廣東話 TTS | ❌ |
+| 技術支援 | Email，3個工作日 |
 
 ---
 
-### 💼 Business（商業版）
-**HK$888/月**（年付 HK$738/月）
+### 💼 Business（商業版）⭐ 最多人選
+**HK$888/月**（年付 HK$738/月，慳 17%）
 
-**適合：** 5–20人中小企
+**適合：** 5–20人中小企、零售店、服務業、Agency
+
+**核心亮點：** 全渠道 + 完整記憶 + 業務自動化——一個 AI，解決日常 80% 重複工作
 
 | 功能 | 包含 |
 |------|------|
-| AI 渠道 | WhatsApp + Telegram + Discord（全部） |
-| 記憶容量 | 5,000 條記憶 |
+| **WhatsApp DM + Group** | ✅ 全部 |
+| **Telegram + Discord** | ✅ |
+| 記憶容量 | 5,000 條 |
 | 每月對話次數 | 3,000 次 |
-| AI 模型 | 3 個模型切換（MiniMax + Claude + GPT） |
-| Skills 技能包 | 全部基礎技能 + 3 個進階技能 |
-| Sub-Agents | 最多 3 個並行 |
-| 定時任務（Cron） | 20 個 |
-| 業務整合 | Google Workspace / Microsoft 365 |
-| 技術支援 | 即時 WhatsApp 支援（週一至六） |
-| 設定服務 | 2 小時 1-on-1 設定服務 |
-| 廣東話 TTS | 500 次/月 |
+| AI 模型 | 3 個切換（MiniMax + Claude + GPT）|
+| **語音訊息轉文字** | ✅ 無限 |
+| **定時任務（Cron）** | 20 個 |
+| 技能包 | 全部基礎 + 5 個進階 |
+| **社交媒體監察** | ✅ 小紅書/Instagram |
+| **文件翻譯** | ✅ 中英 |
+| **股票/市場資訊** | ✅ |
+| **圖片生成** | ✅ 100 次/月 |
+| **廣東話 TTS** | ✅ 500 次/月 |
+| Sub-Agents | 3 個並行 |
+| 技術支援 | WhatsApp 即時（週一至六）|
+| 設定服務 | 2 小時 1-on-1 |
+| **Google Workspace 整合** | ✅ |
 
 ---
 
 ### 🏢 Enterprise（企業版）
-**HK$2,888/月起**（按需報價）
+**HK$2,888/月起**
 
-**適合：** 20人以上企業、連鎖店
+**適合：** 20人以上企業、連鎖店、IT 公司
 
 | 功能 | 包含 |
 |------|------|
-| AI 渠道 | 全渠道 + 自訂整合 |
+| 全部 Business 功能 | ✅ |
 | 記憶容量 | 無限 |
-| 每月對話次數 | 無限 |
-| AI 模型 | 全部模型 + 自訂微調 |
-| Skills 技能包 | 全部 + 客製化開發 |
-| Sub-Agents | 無限並行 |
-| 定時任務（Cron） | 無限 |
-| 部署方式 | 雲端或自架（私有部署） |
-| 業務整合 | 全部 + API 客製化 |
-| Agent 數量 | 多個專門 AI（客服、行銷、財務...） |
-| 支援 | 專屬客戶成功經理 |
-| SLA | 99.9% 在線率保證 |
+| 對話次數 | 無限 |
+| AI 模型 | 全部 + 可微調 |
+| 技能包 | 全部 + 客製化開發 |
+| **多個專門 AI** | ✅（客服AI、行銷AI、財務AI）|
+| **私有部署** | ✅（數據不離開公司）|
+| Sub-Agents | 無限 |
+| 定時任務 | 無限 |
+| WhatsApp 帳號數量 | 多個 |
+| 專屬客戶成功經理 | ✅ |
+| SLA 99.9% | ✅ |
+| 符合 PDPO | ✅ |
 
 ---
 
-### 4.2 增值服務（Add-ons）
+### 增值服務 Add-ons
 
 | 服務 | 定價 | 說明 |
 |------|------|------|
-| 設定服務（基礎） | HK$800 一次性 | 2 小時設定 + 培訓 |
-| 設定服務（深度） | HK$2,500 一次性 | 全天設定 + 流程設計 |
+| 基礎設定服務 | HK$800（一次） | 2 小時設定 + 培訓 |
+| 深度設定服務 | HK$2,500（一次） | 全天設定 + 業務流程設計 |
 | 客製化 Skill 開發 | HK$5,000 起 | 按需開發專屬功能 |
-| 額外對話次數 | HK$100/1,000次 | 超額使用 |
-| 緊急支援 | HK$500/小時 | SLA 以外緊急協助 |
-| 月度健康報告 | 免費（企業版） | AI 使用分析報告 |
+| 額外對話次數 | HK$100/1,000 次 | 超額使用 |
+| HKTVMall/電商監察 | HK$200/月 Add-on | 加購技能包 |
+| 定期月報分析 | HK$500/月 | AI 使用效益報告 |
 
 ---
 
-## 5. 網站架構規劃
+## 6. 用戶故事——一天用下來的體驗
 
-### 5.1 頁面結構
+### 陳生的一天（20人貿易公司老闆）
+
+```
+07:30 AM — 起床，WhatsApp 一打開
+  Area2 AI：「早安陳生！昨晚有 3 條客戶查詢，我已幫你
+            整理好：
+            1. 美麗華公司問報價 → 我已準備好草稿，
+               你確認後發出？
+            2. 李生問貨期 → 根據上次紀錄，
+               應該係下週三，確認嗎？
+            3. 新客戶 ABC Ltd 詢盤 → 未有背景資料，
+               需要你親自跟進」
+
+08:00 AM — 讀了一段語音備忘（廣東話）
+  Area2 AI 自動：轉文字 → 整理成行動事項 →
+                 儲存到 Lark Tasks
+
+10:00 AM — 開完同供應商嘅會議
+  陳生（WhatsApp Group）：「剛才開完會，
+                          [@Area2AI 幫我整理下行動事項]」
+  Area2 AI：「✅ 已整理：
+             1. 訂單確認 → 陳生 → 今日內
+             2. 更新報價 → 小明 → 週三前
+             3. 跟進付款 → 阿芬 → 本週五
+             已設定提醒，時間到會通知各人」
+
+12:30 PM — 午飯時間
+  Area2 AI 主動推送：「📊 今日市場摘要：
+                      • 你主要採購品類原材料價格上升 3%
+                      • 競品 X 公司昨日喺小紅書發佈新品
+                      • 港股：你持倉相關股份升 1.2%」
+
+03:00 PM — 收到客戶發來一份英文合約 PDF
+  陳生（WhatsApp）：「幫我睇下呢個合約有咩要注意」
+  Area2 AI：「✅ 已分析合約（23頁）：
+             🔴 風險條款：第 8 條付款期限較短（15日）
+             🟡 注意：第 12 條自動續約條款，需提前 30 日通知
+             🟢 整體條款標準，無異常」
+
+06:00 PM — 下班
+  陳生：「今日OK，收工」
+  Area2 AI：「好！我繼續監察 WhatsApp，如有緊急查詢
+            我先回覆。明早 7:30 再整理今日未處理事項給你。
+            祝晚安！」
+
+10:30 PM — 新客戶深夜發查詢
+  Area2 AI 自動回覆：「您好！感謝查詢，本公司 AI 助手
+                      已收到您的訊息。陳生明早會親自跟進，
+                      請期待！同時我已記下您的需求：[摘要]」
+```
+
+### 結果：
+- ⏱️ 陳生每日節省 **2–3 小時** WhatsApp 處理時間
+- 💰 零深夜漏客（AI 24/7 在線）
+- 🧠 所有客戶資料、決定自動記錄
+- 📊 每日市場情報不用自己搜索
+
+---
+
+## 7. 網站架構規劃
+
+### 7.1 頁面結構（WhatsApp 為重心）
 
 ```
 / (首頁)
-├── /features (功能介紹)
-│   ├── /features/memory (永久記憶)
-│   ├── /features/channels (多渠道)
-│   ├── /features/automation (自動化)
-│   └── /features/skills (技能包)
-├── /pricing (定價)
-├── /use-cases (使用場景)
-│   ├── /use-cases/retail (零售)
-│   ├── /use-cases/agency (Marketing Agency)
-│   ├── /use-cases/trade (貿易公司)
-│   └── /use-cases/professional-services (專業服務)
-├── /blog (博客)
-├── /about (關於我們)
-├── /contact (聯絡)
-├── /demo (預約示範)
-├── /faq (常見問題)
-└── /legal
-    ├── /legal/privacy (私隱政策)
-    └── /legal/terms (服務條款)
+├── #hero          → WhatsApp 操作 GIF/示範
+├── #pain-points   → 「你的 WhatsApp 地獄」共鳴區
+├── #how-it-works  → 3 步驟：連接→說話→AI做嘢
+├── #features      → 功能展示（WhatsApp中心）
+├── #use-cases     → 3個行業場景
+├── #memory        → 「越用越識你」專門section
+├── #pricing       → 定價
+├── #demo-video    → 2分鐘示範影片
+└── #cta           → 免費試用
+
+/features
+├── /features/whatsapp     → WhatsApp 深度功能
+├── /features/memory       → 記憶系統解說
+├── /features/automation   → 自動化任務
+└── /features/skills       → 技能包目錄
+
+/use-cases
+├── /use-cases/retail         → 零售/連鎖店
+├── /use-cases/trade          → 貿易公司
+├── /use-cases/agency         → 數碼營銷 Agency
+├── /use-cases/professional   → 專業服務（會計/律師）
+└── /use-cases/restaurant     → 餐飲業（WhatsApp 訂座）
+
+/pricing         → 定價（3方案 + FAQs）
+/demo            → 預約示範（Cal.com）
+/blog            → 博客
+/faq             → 常見問題
+/about           → 關於我們
+/skills-library  → 全部技能包目錄（SEO頁）
+/compare         → 與 ChatGPT / Superchat 比較
 ```
 
-### 5.2 多語言版本
-```
-/                    → 自動偵測（預設廣東話）
-/zh-hk/              → 廣東話（香港）
-/zh-tw/              → 繁體中文（台灣）
-/en/                 → 英文
-```
+### 7.2 關鍵「WhatsApp」設計決策
+- Hero 區：展示手機 WhatsApp 對話截圖（真實感）
+- 功能說明：全部用 WhatsApp 對話氣泡展示
+- 「越用越識你」Section：時間軸展示（Day1 vs Day90 對比）
+- CTA：「立即連接你的 WhatsApp」（唔係「免費試用」）
 
 ---
 
-## 6. 技術架構
+## 8. 技術架構
 
-### 6.1 前端技術棧
-
+### 8.1 前端技術棧
 ```
 Nuxt 4 (Vue 3)
-├── @nuxt/ui (UI 組件庫)
-├── @nuxtjs/i18n (多語言)
-├── @nuxt/content (博客/文件)
-├── @nuxt/image (圖片優化)
-├── @nuxtjs/seo (SEO 工具)
-├── Pinia (狀態管理)
-├── VueUse (Composables)
-└── Tailwind CSS v4
+├── @nuxt/ui v4          → UI 組件
+├── @nuxtjs/i18n         → 多語言（zh-hk / en）
+├── @nuxt/content        → 博客 + 技能包文件
+├── @nuxt/image          → 圖片優化
+├── @nuxtjs/seo          → SEO
+├── Pinia                → 狀態（定價 toggle 等）
+└── Tailwind CSS v4      → 樣式
 ```
 
-### 6.2 後端（最小化）
-
+### 8.2 後端（Nitro + Cloudflare）
 ```
-Nitro (Nuxt 內置)
-├── /api/contact (聯絡表單)
-├── /api/demo (預約示範)
-└── /api/newsletter (訂閱電郵)
+server/api/
+├── contact.post.ts      → 聯絡表單 → Resend Email
+├── demo.post.ts         → Demo 預約
+└── newsletter.post.ts   → 電郵訂閱
 ```
 
-### 6.3 第三方服務
-
-| 服務 | 用途 | 費用 |
-|------|------|------|
-| Cloudflare Pages | 靜態部署 | 免費 |
-| Cloudflare R2 | 圖片存儲 | 幾乎免費 |
-| Resend | 電郵發送 | 免費層夠用 |
-| Stripe | 訂閱付款 | 2.9% + HK$2.35/筆 |
-| Cal.com | 預約 Demo | 免費（自架或雲端） |
-| Google Analytics 4 | 流量分析 | 免費 |
-| Hotjar | 用戶行為 | 免費層可用 |
-
-### 6.4 部署架構
-
-```
-GitHub (Source Code)
-    ↓ Git Push
-Cloudflare Pages (自動部署)
-    ├── 靜態資源 CDN
-    ├── Edge Functions (API)
-    └── R2 Storage (媒體)
-```
+### 8.3 第三方服務
+| 服務 | 用途 |
+|------|------|
+| Cloudflare Pages | 靜態部署 + Edge Functions |
+| Resend | 電郵發送 |
+| Cal.com | Demo 預約 |
+| Stripe | 訂閱付款（Phase 2）|
+| GA4 + Hotjar | 流量 + 行為分析 |
 
 ---
 
-## 7. Nuxt.js 開發規格
+## 9. Nuxt.js 開發規格
 
-### 7.1 目錄結構
-
-```
-area2-ai-website/
-├── app/
-│   ├── assets/
-│   │   ├── css/
-│   │   │   └── main.css          # Tailwind + 自訂樣式
-│   │   └── images/               # 靜態圖片
-│   ├── components/
-│   │   ├── landing/
-│   │   │   ├── HeroSection.vue   # 首頁 Hero
-│   │   │   ├── PainPoints.vue    # 用戶痛點
-│   │   │   ├── Features.vue      # 功能展示
-│   │   │   ├── Pricing.vue       # 定價表
-│   │   │   ├── Testimonials.vue  # 客戶見證
-│   │   │   ├── FAQ.vue           # 常見問題
-│   │   │   └── CTA.vue           # 行動號召
-│   │   ├── layout/
-│   │   │   ├── AppHeader.vue     # 頂部導航
-│   │   │   ├── AppFooter.vue     # 底部
-│   │   │   └── LanguageSwitcher.vue
-│   │   └── ui/
-│   │       ├── PricingCard.vue   # 定價卡片
-│   │       ├── FeatureCard.vue   # 功能卡片
-│   │       └── UseCaseCard.vue   # 場景卡片
-│   ├── composables/
-│   │   ├── useI18nHelper.ts      # i18n 工具函數
-│   │   └── usePricing.ts         # 定價邏輯
-│   ├── layouts/
-│   │   ├── default.vue           # 預設佈局
-│   │   └── landing.vue           # 落地頁佈局
-│   ├── pages/
-│   │   ├── index.vue             # 首頁
-│   │   ├── features/
-│   │   │   └── index.vue
-│   │   ├── pricing.vue           # 定價頁
-│   │   ├── use-cases/
-│   │   │   └── [slug].vue        # 動態場景頁
-│   │   ├── blog/
-│   │   │   ├── index.vue         # 博客列表
-│   │   │   └── [slug].vue        # 博客文章
-│   │   ├── demo.vue              # 預約示範
-│   │   ├── faq.vue               # FAQ
-│   │   └── contact.vue           # 聯絡
-│   └── plugins/
-│       └── analytics.client.ts   # GA4 初始化
-├── content/
-│   ├── blog/
-│   │   ├── zh-hk/               # 廣東話博客
-│   │   └── en/                  # 英文博客
-│   └── faq/
-│       ├── zh-hk.yml
-│       └── en.yml
-├── i18n/
-│   ├── locales/
-│   │   ├── zh-hk.json            # 廣東話翻譯
-│   │   ├── zh-tw.json            # 繁中翻譯
-│   │   └── en.json               # 英文翻譯
-│   └── i18n.config.ts
-├── public/
-│   ├── _headers                  # Cloudflare 快取控制
-│   ├── _redirects                # SPA 路由
-│   ├── robots.txt
-│   └── sitemap.xml
-├── server/
-│   └── api/
-│       ├── contact.post.ts       # 聯絡表單
-│       └── demo.post.ts          # 預約 Demo
-├── nuxt.config.ts
-├── tailwind.config.ts
-└── package.json
-```
-
-### 7.2 nuxt.config.ts 核心配置
+### 9.1 核心 nuxt.config.ts
 
 ```typescript
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   future: { compatibilityVersion: 4 },
-  
+
   modules: [
     '@nuxt/ui',
     '@nuxtjs/i18n',
@@ -405,17 +537,18 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/seo',
     '@pinia/nuxt',
+    '@vueuse/nuxt',
   ],
-  
-  // i18n 設定
+
   i18n: {
     locales: [
       { code: 'zh-hk', iso: 'zh-HK', file: 'zh-hk.json', name: '廣東話' },
-      { code: 'zh-tw', iso: 'zh-TW', file: 'zh-tw.json', name: '繁體中文' },
       { code: 'en',    iso: 'en-HK', file: 'en.json',    name: 'English' },
     ],
     defaultLocale: 'zh-hk',
-    strategy: 'prefix_except_default',  // / = 廣東話，/en/ = 英文
+    strategy: 'prefix_except_default',
+    lazy: true,
+    langDir: 'i18n/locales/',
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'area2_locale',
@@ -423,32 +556,22 @@ export default defineNuxtConfig({
     },
     vueI18n: './i18n/i18n.config.ts',
   },
-  
-  // SEO
+
   site: {
     url: 'https://area2ai.hk',
     name: 'Area2 AI',
-    description: '香港中小企 AI 業務助手',
+    description: '住喺你 WhatsApp 入面的 AI — 越用越識你的業務',
   },
-  
-  // 靜態部署
-  ssr: true,
-  nitro: {
-    preset: 'cloudflare-pages',
-  },
-  
-  // 顏色模式
-  colorMode: { preference: 'light' },
-  
-  // CSS
+
   css: ['~/assets/css/main.css'],
+  ssr: true,
+  nitro: { preset: 'cloudflare-pages' },
 })
 ```
 
-### 7.3 i18n 翻譯鍵結構
+### 9.2 i18n 翻譯核心鍵值（zh-hk.json）
 
 ```json
-// i18n/locales/zh-hk.json
 {
   "nav": {
     "features": "功能",
@@ -456,344 +579,385 @@ export default defineNuxtConfig({
     "useCases": "使用場景",
     "blog": "博客",
     "demo": "預約示範",
-    "login": "登入"
+    "connect": "連接 WhatsApp"
   },
   "hero": {
-    "badge": "香港首創 AI 業務助手",
-    "title": "你的 AI 幫手，真係會幫你做嘢",
-    "subtitle": "唔只係問答——WhatsApp 即回、自動整理、永久記憶、24 小時在線",
-    "cta": "免費試用 14 日",
-    "ctaSecondary": "睇示範"
+    "badge": "🇭🇰 香港第一個 WhatsApp AI 幫手",
+    "title": "你 WhatsApp 它，它幫你做嘢",
+    "titleHighlight": "越用越識你",
+    "subtitle": "唔使裝 App、唔使改習慣——直接喺 WhatsApp 用 AI。永久記憶你的業務，主動幫你跟進。",
+    "cta": "連接你的 WhatsApp",
+    "ctaSecondary": "睇 2 分鐘示範 ▶",
+    "socialProof": "已有 {count} 間香港企業使用"
   },
   "painPoints": {
-    "title": "你係咪有以下問題？",
+    "title": "你嘅 WhatsApp 每日係咁？",
     "items": {
-      "whatsapp": {
+      "overflow": {
         "title": "WhatsApp 回唔切",
         "desc": "每日 100+ 訊息，自己回到手軟，一唔小心就漏咗重要客"
       },
-      "memory": {
+      "voiceMsg": {
+        "title": "語音訊息播極都播唔完",
+        "desc": "廣東話語音訊息一段 3 分鐘，要自己播晒先知講咩"
+      },
+      "afterHours": {
+        "title": "下班後仲係響",
+        "desc": "晚上 10 點收到查詢，無人回，客人去左競爭對手"
+      },
+      "noMemory": {
         "title": "AI 唔記得你",
-        "desc": "每次用 ChatGPT 都要重新解釋公司背景，浪費時間"
-      },
-      "offline": {
-        "title": "下班客戶仲問嘢",
-        "desc": "晚上 10 點收到查詢，無人回覆，客人轉去競爭對手"
-      },
-      "tools": {
-        "title": "工具太多太散",
-        "desc": "Email、WhatsApp、Excel、Google Doc... 資訊到處都係"
+        "desc": "每次用 ChatGPT 都要重新解釋公司背景，用極都唔識你"
       }
     }
   },
-  "features": {
-    "title": "Area2 AI 點解決",
-    "memory": {
-      "title": "永久記憶你的業務",
-      "desc": "記住你的公司、產品、客戶、SOP——唔使每次重頭講"
-    },
-    "channels": {
-      "title": "WhatsApp + Telegram 齊上",
-      "desc": "用你慣用的渠道溝通，唔使改變工作習慣"
-    },
-    "automation": {
-      "title": "真正執行任務",
-      "desc": "唔只答問題——幫你搵資料、整報告、發提醒、排會議"
-    },
-    "cantonese": {
-      "title": "廣東話 AI",
-      "desc": "用廣東話溝通，理解香港商業用語和文化"
+  "howItWorks": {
+    "title": "三步驟，即刻開始",
+    "steps": {
+      "connect": {
+        "num": "01",
+        "title": "連接你的 WhatsApp",
+        "desc": "掃描 QR Code，30 秒完成設定"
+      },
+      "tell": {
+        "num": "02",
+        "title": "告訴 AI 你的業務",
+        "desc": "用廣東話介紹你的公司、產品、常見問題"
+      },
+      "work": {
+        "num": "03",
+        "title": "AI 開始幫你做嘢",
+        "desc": "從今日起，AI 喺 WhatsApp 自動幫你處理、提醒、跟進"
+      }
     }
+  },
+  "memory": {
+    "title": "越用越識你——不只是 AI，而是你的數字孖生",
+    "day1": "第 1 日",
+    "day30": "第 30 日",
+    "day90": "第 90 日",
+    "day1Desc": "一個聰明的 AI",
+    "day30Desc": "一個識你業務的 AI",
+    "day90Desc": "一個幾乎係你數字孖生的 AI",
+    "moat": "用了 3 個月後，AI 已記住你的客戶、習慣、SOP——轉用其他工具要從頭教過，用戶根本唔捨得走"
   },
   "pricing": {
     "title": "簡單透明定價",
-    "monthly": "每月",
-    "yearly": "每年",
-    "savePercent": "慳 {percent}%",
+    "toggle": {
+      "monthly": "月付",
+      "yearly": "年付",
+      "save": "慳 17%"
+    },
+    "currency": "HK$",
+    "period": "/月",
     "mostPopular": "最多人選",
     "plans": {
       "starter": {
         "name": "入門版",
-        "price": "298",
-        "desc": "自由職業者 / 初創適用",
-        "cta": "立即開始"
+        "price": { "monthly": 298, "yearly": 248 },
+        "desc": "個人老闆 / 1–3人初創",
+        "highlight": "WhatsApp DM + 基礎記憶",
+        "cta": "免費試用 14 日"
       },
       "business": {
         "name": "商業版",
-        "price": "888",
-        "desc": "5–20人中小企",
+        "price": { "monthly": 888, "yearly": 738 },
+        "desc": "5–20 人中小企",
+        "highlight": "全渠道 + 完整記憶 + 業務自動化",
         "cta": "免費試用 14 日"
       },
       "enterprise": {
         "name": "企業版",
-        "price": "2,888",
-        "desc": "20人以上企業",
+        "price": { "monthly": 2888, "yearly": 2398 },
+        "desc": "20 人以上企業",
+        "highlight": "多個專門 AI + 私有部署",
         "cta": "聯絡我們"
       }
     }
-  },
-  "cta": {
-    "title": "準備好讓 AI 幫你做嘢？",
-    "subtitle": "14 日免費試用，無需信用卡",
-    "button": "立即免費試用"
-  },
-  "footer": {
-    "tagline": "香港中小企最得力的數字員工",
-    "product": "產品",
-    "company": "公司",
-    "legal": "法律",
-    "copyright": "© {year} Area2 Limited. 版權所有。"
   }
 }
 ```
 
----
+### 9.3 WhatsApp Mockup 組件（核心視覺元素）
 
-## 8. 頁面設計細則
+```vue
+<!-- app/components/ui/WhatsAppChat.vue -->
+<!-- 展示 AI 對話的手機 WhatsApp 截圖風格組件 -->
+<template>
+  <div class="relative max-w-[320px] mx-auto">
+    <!-- 手機殼 -->
+    <div class="bg-gray-900 rounded-[2.5rem] p-3 shadow-2xl">
+      <!-- 狀態欄 -->
+      <div class="bg-[#075E54] rounded-t-[2rem] px-4 py-3 flex items-center gap-3">
+        <div class="w-8 h-8 bg-green-400 rounded-full flex items-center justify-center text-xs font-bold">A2</div>
+        <div>
+          <div class="text-white text-sm font-medium">Area2 AI</div>
+          <div class="text-green-200 text-xs">在線</div>
+        </div>
+      </div>
+      
+      <!-- 對話區域 -->
+      <div class="bg-[#ECE5DD] min-h-[400px] p-3 space-y-2 rounded-b-[2rem]">
+        <!-- 用戶訊息 -->
+        <div v-for="msg in messages" :key="msg.id"
+             :class="msg.from === 'user' ? 'flex justify-end' : 'flex justify-start'">
+          <div :class="[
+            'max-w-[80%] rounded-lg px-3 py-2 text-sm shadow-sm',
+            msg.from === 'user' 
+              ? 'bg-[#DCF8C6] text-gray-800 rounded-tr-none'
+              : 'bg-white text-gray-800 rounded-tl-none'
+          ]">
+            <p class="leading-relaxed whitespace-pre-wrap">{{ msg.text }}</p>
+            <div class="text-[10px] text-gray-400 text-right mt-1">{{ msg.time }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
-### 8.1 首頁設計（index.vue）
+<script setup lang="ts">
+interface Message {
+  id: number
+  from: 'user' | 'ai'
+  text: string
+  time: string
+}
 
-#### Section 1: Hero
-```
-[上方導航：Logo | 功能 | 定價 | 場景 | [預約示範 CTA Button]]
-
-Hero 區域：
-- Badge：「🇭🇰 香港第一個 AI 業務助手」
-- H1：你的 AI 幫手，真係會幫你做嘢
-- Subtitle：唔只係問答——WhatsApp 即回、自動整理、永久記憶、24 小時在線
-- CTA 主按鈕：「免費試用 14 日」
-- CTA 次按鈕：「睇 2 分鐘示範 ▶」
-- 右側：AI 聊天界面 Mockup（展示 WhatsApp 自動回覆場景）
-
-Social Proof Bar：
-「已有 [XXX] 間香港企業使用 | 4.9★ 用家評分 | 14日免費試用」
-```
-
-#### Section 2: 痛點（Pain Points）
-```
-標題：「你係咪有以下問題？」
-4個痛點卡片（圖標 + 標題 + 描述）：
-1. 📱 WhatsApp 回唔切
-2. 🧠 AI 唔記得你
-3. 🌙 下班後客戶仲問嘢
-4. 🗂️ 工具太多太散
-
-→ 過渡：「Area2 AI 一個解決晒」
-```
-
-#### Section 3: 功能展示
-```
-標籤式展示（每個功能有示範 GIF/截圖）：
-Tab 1: 永久記憶 → 展示記憶如何運作
-Tab 2: 多渠道 → WhatsApp + Telegram 示範
-Tab 3: 任務執行 → 自動整理報告示範
-Tab 4: 廣東話 AI → 廣東話對話示範
-```
-
-#### Section 4: 使用場景（Use Cases）
-```
-3 個場景卡片：
-1. 貿易公司老闆 → AI 自動回客戶查詢 + 每日銷售摘要
-2. Marketing Agency → AI 幫整 client report + 社媒帖文
-3. 零售店 → AI 管理 WhatsApp Group + 處理投訴
-```
-
-#### Section 5: 定價
-```
-月付 / 年付 切換 Toggle
-3個定價卡片（Starter / Business / Enterprise）
-年付省 16% 提示
-常見問題摺疊（FAQAccordion）
-```
-
-#### Section 6: 客戶見證
-```
-3–5 個真實客戶引言
-（初期可用：「Beta 測試用家」）
-```
-
-#### Section 7: CTA
-```
-全寬 Banner：
-「準備好讓 AI 幫你做嘢？」
-「14 日免費試用，無需信用卡，隨時取消」
-[立即免費試用] [預約 Demo]
-```
-
-### 8.2 定價頁設計細節
-
-- 月付/年付 toggle（年付顯示節省百分比）
-- Feature comparison table（所有方案詳細對比）
-- FAQ accordion（付款、取消、升降級問題）
-- 企業版 custom quote 表單
-
-### 8.3 Demo 預約頁
-
-- Cal.com 嵌入式日曆
-- 表單：公司名、聯絡人、公司規模、主要痛點（多選）、偏好時間
-- 預約後：自動 WhatsApp/Email 確認 + 前一天提醒
-
----
-
-## 9. 多語言策略
-
-### 9.1 語言優先級
-1. **廣東話（zh-hk）** — 主要語言，預設語言，最詳細
-2. **英文（en）** — 面向外資企業、國際客戶
-3. **繁體中文（zh-tw）** — 方便台灣/新加坡市場（後期加）
-
-### 9.2 廣東話 vs 書面中文策略
-- **行銷文案（Hero、CTA）：** 廣東話口語（「做嘢」「唔使」「即刻」）
-- **功能說明：** 書面繁體中文（正式、清晰）
-- **FAQ：** 廣東話口語（貼近用戶表達方式）
-- **法律條款：** 純書面文（正式）
-
-### 9.3 SEO 多語言標籤
-```html
-<!-- 每頁 head 加入 hreflang -->
-<link rel="alternate" hreflang="zh-HK" href="https://area2ai.hk/" />
-<link rel="alternate" hreflang="en-HK" href="https://area2ai.hk/en/" />
-<link rel="alternate" hreflang="x-default" href="https://area2ai.hk/" />
+const props = defineProps<{ messages: Message[] }>()
+</script>
 ```
 
 ---
 
-## 10. SEO 策略
+## 10. 頁面設計細則
 
-### 10.1 目標關鍵詞
+### 10.1 首頁設計（重點 Section）
 
-| 關鍵詞 | 搜索意圖 | 優先級 |
-|-------|---------|-------|
-| 香港 AI 助手 | 商業 | ⭐⭐⭐ |
-| AI WhatsApp 自動回覆香港 | 商業 | ⭐⭐⭐ |
-| 中小企 AI 自動化香港 | 商業 | ⭐⭐⭐ |
-| Hong Kong AI business assistant | 商業 | ⭐⭐⭐ |
-| ChatGPT 替代方案香港 | 比較 | ⭐⭐ |
-| AI 幫手訂閱 | 商業 | ⭐⭐ |
-| WhatsApp chatbot 香港 | 商業 | ⭐⭐ |
-| 廣東話 AI | 資訊 | ⭐ |
+#### Hero Section
+```
+[Badge] 🇭🇰 香港第一個 WhatsApp AI 幫手
 
-### 10.2 內容行銷策略（博客）
+H1: 你 WhatsApp 它，
+    它幫你做嘢——
+    [越用越識你] ← 漸層高亮
 
-**月度博客計劃（前 6 個月）：**
+Subtitle: 唔使裝 App、唔使改習慣
+          直接喺 WhatsApp 用 AI
+          永久記憶你的業務，主動幫你跟進
 
-| 月份 | 文章主題 |
-|------|---------|
-| 1 | 香港中小企 AI 實戰指南（2025）|
-| 1 | 點解你的 ChatGPT 幫唔到你的業務？|
-| 2 | WhatsApp AI 自動回覆：實測對比 5 大工具 |
-| 2 | 貿易公司如何用 AI 省下每月 80 小時 |
-| 3 | AI 記憶系統是什麼？比 ChatGPT 強在哪裏？ |
-| 3 | 香港政府 AI 資助懶人包（附申請步驟）|
-| 4 | Marketing Agency 如何用 AI 同時服務 10 個客戶 |
-| 5 | 廣東話 AI 大比拼：哪個最識廣東話？ |
-| 6 | 6 個月回顧：Area2 AI 客戶成效報告 |
+[連接你的 WhatsApp]  [睇 2 分鐘示範 ▶]
 
----
+右側：手機 WhatsApp 對話動畫
+      (展示 AI 自動處理客戶查詢)
 
-## 11. 開發路線圖
+下方 Social Proof：
+「✓ 香港本地團隊  ✓ 廣東話 AI  
+ ✓ 14日免費試用  ✓ 無需信用卡」
+```
 
-### Phase 1: MVP 網站（4–6 週）
+#### 「越用越識你」Section（重點設計）
+```
+標題：不只是 AI——它是你的數字孖生
 
-**Week 1–2: 基礎建設**
-- [ ] 初始化 Nuxt 4 項目
-- [ ] 設定 Tailwind CSS v4 + Nuxt UI
-- [ ] 設定 i18n（zh-hk + en）
-- [ ] 建立基礎 Layout（Header + Footer）
-- [ ] Cloudflare Pages 部署設定
+時間軸（橫向）：
 
-**Week 3–4: 核心頁面**
-- [ ] 首頁（Hero + 痛點 + 功能 + 定價 + CTA）
-- [ ] 定價頁
-- [ ] 聯絡頁 + API
-- [ ] Demo 預約頁（Cal.com 整合）
-- [ ] FAQ 頁
+Day 1          Day 30         Day 90
+  ↓               ↓               ↓
+聰明的 AI      識你業務的 AI   你的數字孖生
+一般回答       用你嘅語氣      主動預測你嘅需要
+               記住你客戶      幾乎唔需要指示
+               自動用你格式
 
-**Week 5–6: 完善**
-- [ ] 英文翻譯完成
-- [ ] SEO meta tags（每頁）
-- [ ] OG Image 生成
-- [ ] Performance 優化（Core Web Vitals）
-- [ ] 手機版優化
-- [ ] Analytics 整合
+下方文字：
+「用了 Area2 AI 3 個月的老闆說：
+ 『它比我秘書更識我的業務』」
+```
 
-### Phase 2: 博客 + 內容（2–4 週）
-- [ ] 設定 @nuxt/content
-- [ ] 博客列表 + 文章頁
-- [ ] 首 4 篇博客文章
-- [ ] 使用場景頁（3 個垂直行業）
-- [ ] 客戶案例頁（1–2 個）
+#### 「它能做什麼」Section（WhatsApp 氣泡展示）
+```
+6 個 Tab，每個 Tab 展示一個 WhatsApp 對話場景：
 
-### Phase 3: 轉化優化（持續）
-- [ ] A/B 測試 Hero 文案
-- [ ] Hotjar 熱圖分析
-- [ ] 提升 CTA 點擊率
-- [ ] 加入客戶見證（真實客戶）
-- [ ] 示範視頻製作
+Tab 1: 📱 自動回覆客戶
+Tab 2: 🎙️ 語音轉行動事項
+Tab 3: 📊 每日業務報告
+Tab 4: 📄 分析你發來的文件
+Tab 5: 🔍 市場情報搜集
+Tab 6: ⏰ 智能提醒跟進
+```
 
-### Phase 4: 商業化功能（後期）
-- [ ] Stripe 訂閱付款整合
-- [ ] 用戶 Dashboard（管理訂閱）
-- [ ] 自助 Onboarding 流程
-- [ ] Skills Marketplace 頁面
+### 10.2 /compare 比較頁（SEO 強）
+
+```
+標題：Area2 AI vs ChatGPT vs Superchat
+
+詳細比較表格（所有功能逐項比較）
++ 每個差異點的詳細解說
+
+針對的搜索關鍵詞：
+- "ChatGPT WhatsApp 整合"
+- "香港 AI 助手比較"
+- "Superchat 替代方案"
+```
 
 ---
 
-## 12. 商業模型
+## 11. 多語言策略
 
-### 12.1 收入預測（保守估計）
+### 語言優先級
+1. **廣東話（zh-hk）** — 主要，預設，最詳細
+2. **英文（en）** — 外資企業、國際客戶
 
-**Year 1 目標：**
-
-| 月份 | 客戶數 | MRR（月經常性收入） |
-|------|--------|-------------------|
-| M1–M3 | 5 | HK$3,490 |
-| M4–M6 | 15 | HK$10,470 |
-| M7–M9 | 35 | HK$24,430 |
-| M10–M12 | 60 | HK$41,880 |
-
-**Year 1 ARR 目標：HK$300,000+**
-
-### 12.2 成本結構
-
-| 成本項目 | 每月 | 備注 |
+### 廣東話口語策略
+| Section | 語氣 | 例子 |
 |---------|------|------|
-| 伺服器（雲端） | HK$500–1,500 | 視用戶數量 |
-| AI API 成本 | HK$1,000–5,000 | 視使用量 |
-| 域名/SSL | HK$100 | 年付 |
-| 行銷費用 | HK$2,000–5,000 | 初期 |
-| 人工（ErIc + 兼職） | 視實際情況 | |
-
-**目標毛利率：70%+**（SaaS 行業標準）
-
-### 12.3 增長槓桿
-1. **口碑轉介：** 每成功轉介一客，兩者各獲 1 個月免費
-2. **行業垂直：** 深耕 1–2 個行業，建立口碑
-3. **政府資助：** 協助客戶申請 AI 資助，降低採用門檻
-4. **Channel Partner：** 與 IT 公司、會計師樓合作，代銷分成
+| Hero / CTA | 廣東話口語 | 「幫你做嘢」「唔使改習慣」「越用越識你」|
+| 功能說明 | 書面繁中 | 「支援廣東話語音識別，自動轉換為文字」|
+| FAQ | 廣東話口語 | 「我唔識技術可以用嗎？」|
+| 法律條款 | 純書面 | 正式中文 |
 
 ---
 
-## 附錄
+## 12. SEO 策略
 
-### A. 技術資源
-- OpenClaw 文件：https://docs.openclaw.ai
-- Nuxt 文件：https://nuxt.com
-- Nuxt UI：https://ui.nuxt.com
-- @nuxtjs/i18n：https://i18n.nuxtjs.org
+### 目標關鍵詞（v2，WhatsApp 中心）
 
-### B. 競品參考
-- OperativeAI：https://operativeai.hk
-- Superchat：https://superchat.com
-- ChatGPT Team：https://chat.openai.com
-- SkyBot：https://skywork.ai
+| 關鍵詞 | 月搜索量（估） | 優先級 |
+|-------|------------|-------|
+| WhatsApp AI 香港 | 高 | ⭐⭐⭐ |
+| AI WhatsApp 自動回覆香港 | 高 | ⭐⭐⭐ |
+| 香港中小企 AI 助手 | 高 | ⭐⭐⭐ |
+| WhatsApp chatbot 香港 | 高 | ⭐⭐⭐ |
+| 廣東話 AI 助手 | 中 | ⭐⭐ |
+| ChatGPT WhatsApp 整合 | 中 | ⭐⭐ |
+| AI 幫助回覆客戶 WhatsApp | 中 | ⭐⭐ |
+| 香港 AI 自動化中小企 | 中 | ⭐⭐ |
 
-### C. 香港 AI 資助資訊
-- 數碼轉型支援先導計劃：https://www.digitisation.gov.hk
-- BUD 專項基金：https://www.tid.gov.hk/bud
-- 香港生產力局 HKPC：https://www.hkpc.org
+### 內容行銷計劃（WhatsApp 主題）
+
+| 文章 | 預計流量 |
+|------|---------|
+| 「2025 香港 WhatsApp AI 全攻略」| 高 |
+| 「點樣用 AI 幫你回覆 WhatsApp（免費教學）」| 高 |
+| 「ChatGPT 點解唔夠用——香港老闆最需要的 AI 係...」| 高 |
+| 「WhatsApp Group AI 助手實測：節省了多少時間？」| 中 |
+| 「廣東話 AI 大比拼：邊個最識香港人講嘢？」| 中 |
 
 ---
 
-*此計劃書由 A2 (B03) 撰寫，基於 2026 年 3 月市場研究數據。*  
-*定期更新：每季度檢視一次，根據市場反饋調整策略。*
+## 13. 開發路線圖
+
+### Phase 1：MVP 網站（4–6 週）
+
+**Week 1–2：基礎**
+- [ ] 初始化 Nuxt 4 + UI + i18n
+- [ ] 設計 Token（顏色、字體——WhatsApp 綠為品牌色）
+- [ ] Header / Footer / Language Switcher
+- [ ] Cloudflare Pages 部署 + `_headers` 設定
+
+**Week 3–4：核心頁面**
+- [ ] 首頁（全部 Sections，含 WhatsApp Mockup）
+- [ ] 定價頁（月付/年付 Toggle + 比較表）
+- [ ] /how-it-works 頁
+- [ ] Demo 預約頁（Cal.com 整合）
+- [ ] 聯絡頁
+
+**Week 5–6：完善**
+- [ ] 英文翻譯
+- [ ] SEO meta + OG Image
+- [ ] Mobile 優化
+- [ ] Performance（Core Web Vitals）
+- [ ] GA4 + Hotjar
+
+### Phase 2：內容 + 轉化（2–4 週）
+- [ ] 博客系統（@nuxt/content）
+- [ ] /compare 比較頁
+- [ ] /skills-library 技能包目錄
+- [ ] 3 個行業 Use Case 頁
+- [ ] 示範影片（2 分鐘，廣東話配音）
+
+### Phase 3：商業化（持續）
+- [ ] Stripe 訂閱整合
+- [ ] 用戶 Dashboard
+- [ ] 自助 Onboarding
+
+---
+
+## 14. 商業模型
+
+### 14.1 收入預測
+
+**Year 1（保守）：**
+
+| 月份 | Starter | Business | Enterprise | MRR |
+|------|---------|---------|------------|-----|
+| M1–3 | 5 | 2 | 0 | HK$3,266 |
+| M4–6 | 12 | 8 | 1 | HK$12,680 |
+| M7–9 | 25 | 18 | 2 | HK$29,186 |
+| M10–12 | 40 | 32 | 5 | HK$56,776 |
+
+**Year 1 ARR 目標：HK$400,000+**
+
+### 14.2 留客機制（越用越懂）
+
+```
+傳統 SaaS 流失原因：
+- 用唔到效果 → 取消
+- 找到更便宜替代 → 轉用
+
+Area2 AI 獨有護城河：
+- 用 3 個月 → AI 記住 1,000+ 條業務記憶
+- 記住所有客戶習慣和偏好
+- 轉用新 AI = 一切從零開始
+- 用戶根本「轉不了」→ 極高留存率
+
+預計 12 個月留存率：85%+（行業平均 75%）
+```
+
+### 14.3 增長槓桿
+1. **口碑：** 轉介享 1 個月免費（介紹者同被介紹者各一個月）
+2. **WhatsApp 病毒式傳播：** 其他人見到 Group 入面有 AI，自然問「呢個係咩？」
+3. **政府資助：** 協助申請 AI 資助，降低採用門檻
+4. **行業深耕：** 餐飲業 WhatsApp 訂座 + 零售業客服
+
+---
+
+## 附錄 A：競品定價詳細對比
+
+| 功能 | ChatGPT Plus HK$156 | OperativeAI HK$488 | Superchat HK$840 | **Area2 AI HK$298** |
+|------|---------------------|---------------------|------------------|---------------------|
+| WhatsApp DM | ❌ | ❌ | ✅ | ✅ |
+| WhatsApp Group | ❌ | ❌ | ✅ | ✅ |
+| AI 記憶（向量）| ❌ | ❌ | ❌ | ✅ |
+| 廣東話語音 | ⚠️ | ⚠️ | ❌ | ✅ |
+| 主動推送 | ❌ | ❌ | ⚠️ | ✅ |
+| 社媒監察 | ❌ | ❌ | ❌ | ✅ |
+| 文件分析 | ✅ | ✅ | ❌ | ✅ |
+| 越用越識你 | ❌ | ❌ | ❌ | ✅ |
+
+## 附錄 B：技術能力清單（基於實際 Skills）
+
+**已確認可用的 Skills（40+個）：**
+- whatsapp-assistant, whatsapp-smart-reminder
+- audio-handler（廣東話語音）
+- social-scraper（小紅書/抖音/Instagram）
+- stock-market（yFinance API）
+- pdf-utils, docx-translator-v2, batch-image-processor
+- minimax-tts, minimax-tts-async（廣東話 TTS）
+- minimax-video, minimax-music, screen-to-script
+- image-generation（Wanx AI）
+- youtube-summarizer
+- hktvmall, taobao-search
+- lark-tasks, planka
+- web-tester, qa-testing, bug-analyzer
+- perplexity-search, web-research-citation
+- marketing-research
+- cms-manual-generator
+- reminders, cron 系統
+
+**記憶系統：** LanceDB（105+ 條，hybrid search）  
+**多模型：** MiniMax M2.5 / Claude Sonnet / GPT-4o / Gemini
+
+---
+
+*v2 更新：WhatsApp 為核心賣點、越用越識你記憶策略、基於實際 Skills 的完整能力清單、用戶故事一天體驗、/compare 比較頁、留客護城河分析*
