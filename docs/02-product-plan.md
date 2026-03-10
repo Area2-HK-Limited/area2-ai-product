@@ -1098,3 +1098,23 @@ AI 發現客人 3 個月冇嚟
 ---
 
 *v6.0 更新：加入入門3步、免費試用/退款保證、HK本地行業場景（餐飲/地產/美容/貿易）、擴展比較表（加 Copilot）、信任建立章節（客戶聲音/五大承諾）*
+
+---
+
+## 21. Area2 AI 可取代的訂閱工具清單（v7 新增）
+
+| 功能 | 現有工具 | 月費(HKD估算) | Area2 AI 取代 |
+|------|---------|------------|-------------|
+| YouTube 摘要 | NoteGPT / Glasp | HK$78–156 | ✅ 直接發連結即得摘要+TTS |
+| 會議記錄 | Otter.ai Pro / Fireflies.ai | HK$780–1,400 (5人) | ✅ 語音上傳→行動項目+任務分配 |
+| AI 寫作助手 | Grammarly / Notion AI | HK$936–1,560 | ✅ WhatsApp 即時中英文文案 |
+| 社交媒體監察 | Buffer / SocialBee | HK$2,262–7,722 | ✅ 小紅書/IG/抖音自動監察+摘要 |
+| AI 圖片生成 | Midjourney Standard | HK$2,340 | ✅ WhatsApp 即說即出圖 |
+| 即時搜尋 | Perplexity Pro | HK$1,560 | ✅ 內建Sonar Pro，附引用來源 |
+| 語音/TTS | ElevenLabs | HK$390–1,716 | ✅ 摘要/報告自動語音版 |
+| 市場Research | 外判Agency | HK$5,000+/次 | ✅ Multi-Agent 30分鐘完成 |
+
+**5人團隊每月節省：HK$7,100+ → 年省 HK$85,000+**
+
+核心優勢：所有功能喺 WhatsApp 完成，共享同一個業務記憶庫，唔需要重複輸入業務資料。
+
