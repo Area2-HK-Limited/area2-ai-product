@@ -959,3 +959,81 @@ Area2 AI 的護城河：
 ---
 
 *v3 更新：普通人語言版功能解說、Vibe Coding 賣點、MCP vs Skills 分別、三大雲端安全認證（AWS/Alibaba/Tencent）、Hostlink 背景、資料安全 FAQ、/trust 頁面設計、SEO 新增安全/Vibe Coding 關鍵詞*
+
+---
+
+## 17. AI 智能調度引擎（Multi-Model Routing）
+
+> *2026年3月更新 — v5.0*
+
+### 核心理念：唔係靠一個 AI，而是讓最合適的 AI 做最擅長的事
+
+Area2 AI 背後運行的，是一套**多模型智能調度系統（Multi-Model Routing Engine）**——與 **Perplexity AI Computer**（同時調度多達 19 個模型）、**Google Gemini Ultra** 等業界頂尖方案採用相同的 **Mixture of Experts (MoE)** 架構理念：
+
+> **不同任務，由最合適的 AI 模型處理。**
+
+### Area2 AI 現時調用的 AI 模型陣容
+
+| 模型 | 擅長領域 | 在 Area2 AI 的用途 |
+|------|---------|-----------------|
+| **Claude Sonnet 4.6**（Anthropic）| 複雜推理 · 長文分析 · 報告撰寫 | 合約分析、QA 報告、深度研究 |
+| **Gemini 3 Pro**（Google DeepMind）| 超長文本 · 多模態 · 推理 | 大型文件處理、圖表分析、多步驟計劃 |
+| **GPT-5**（OpenAI）| 創意生成 · 對話 · 高風險決策 | 文案撰寫、自動化執行、並行驗證 |
+| **MiniMax M2.5**（MiniMax，中文優化）| 廣東話 · 速度極快 · 低成本 | 日常 WhatsApp 即時回覆、簡單查詢 |
+| **Claude Haiku 4.5**（Anthropic）| 輕量快速 · 高效率 | 快速分類、格式化、低複雜度任務 |
+| **Perplexity Sonar Pro**（Perplexity AI）| 即時網絡搜索 · 引用來源 | 所有需要最新資料的查詢、Fact Check |
+
+### 三層智能調度架構
+
+```
+Layer 1：自動分類（AI Router）
+→ 分析訊息，判斷任務類型：
+  日常問答 / 深度研究 / 代碼生成 / 超長文件 / 高風險決策
+
+Layer 2：智能派發
+→ 自動選用最合適的模型（或多個並行）
+→ 用戶唔需要知道用咗哪個模型——結果永遠是最優的
+
+Layer 3：質素升級（Auto-Escalation）
+→ 回答質素不達標 → 自動升級到更強的模型重新處理
+→ 確保你收到的答案永遠是最佳版本
+```
+
+### 與業界頂尖方案對比
+
+| 方案 | 模型數量 | 機制 | 月費 |
+|------|---------|------|------|
+| Perplexity Computer | 19個 | 主控 AI 拆解任務，派專門模型並行處理 | USD$200/月 |
+| Area2 AI | 6個+ | 同等 Multi-Agent + Auto-Escalation | HK$298起 |
+| ChatGPT Plus | 1個 | 單一模型（GPT-4o）| USD$20/月（功能受限）|
+| Claude Pro | 1個 | 單一模型（Claude Sonnet）| USD$20/月（功能受限）|
+
+### 實際例子
+
+```
+你（WhatsApp）：「幫我研究香港零售市場的競爭對手」
+
+AI Router 自動決定：深度研究任務 → 啟動 Multi-Agent
+
+  專員 A（Perplexity Sonar Pro）→ 即時搜索最新市場數據，附引用來源
+  專員 B（Gemini 3 Pro）       → 分析競爭格局，生成 SWOT 框架  [並行]
+  專員 C（Claude Sonnet）      → 整合資料，撰寫結構化報告
+
+主控 AI：審閱質素 → 如需要自動升級模型
+
+你收到：有來源、有分析框架、可直接使用的市場報告
+```
+
+### 為什麼 Multi-Model 比單一 AI 好？
+
+| | Area2 AI（Multi-Model）| 傳統單一 AI（ChatGPT / Claude）|
+|-|----------------------|-------------------------------|
+| 任務匹配 | 每個任務用最合適的模型 | 所有任務用同一個模型 |
+| 速度 | 並行處理，3-5 倍提升 | 串行處理，速度受限 |
+| 可靠性 | 任一模型失效自動切換 | 模型出問題，服務中斷 |
+| 準確度 | Auto-Escalation 確保最佳 | 無升級機制 |
+| 供應商風險 | 多供應商，零綁定 | 單一供應商綁定 |
+
+---
+
+*v5.0 更新：新增 AI 智能調度引擎章節，引用 Perplexity Computer 架構對比，說明 Area2 AI 模型陣容及三層 Routing 機制*
